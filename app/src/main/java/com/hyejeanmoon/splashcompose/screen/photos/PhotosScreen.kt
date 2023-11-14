@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
@@ -41,7 +42,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.items
+import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
 import com.hyejeanmoon.splashcompose.ErrorAlert
 import com.hyejeanmoon.splashcompose.entity.Photo
@@ -59,9 +60,9 @@ fun PhotoScreen(
     LazyColumn(
         modifier = modifier.fillMaxSize()
     ) {
-        items(pagingItems) { photoItem ->
+        items(count = pagingItems.itemCount) { index ->
             val item by remember {
-                mutableStateOf(photoItem)
+                mutableStateOf(pagingItems[index])
             }
             item?.also {
                 PhotoImage(
@@ -76,9 +77,11 @@ fun PhotoScreen(
             loadState.refresh is LoadState.Error -> {
                 ErrorAlert()
             }
+
             loadState.append is LoadState.Error -> {
                 ErrorAlert()
             }
+
             loadState.prepend is LoadState.Error -> {
                 ErrorAlert()
             }
@@ -127,7 +130,7 @@ fun PhotoImage(
                 .padding(20.dp, 0.dp)
                 .clip(RoundedCornerShape(10.dp))
                 .clickable { PhotoDetailActivity.start(photo.id ?: "", context) },
-            painter = rememberImagePainter(
+            painter = rememberAsyncImagePainter(
                 photoUrl
             ),
             contentDescription = "photo image",
@@ -169,7 +172,7 @@ fun PhotoUserInfo(
                         userName
                     )
                 },
-            painter = rememberImagePainter(
+            painter = rememberAsyncImagePainter(
                 userPhoto
             ),
             contentDescription = "user profile image"

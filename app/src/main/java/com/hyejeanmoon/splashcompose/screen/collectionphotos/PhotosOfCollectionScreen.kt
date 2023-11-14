@@ -18,6 +18,7 @@ package com.hyejeanmoon.splashcompose.screen.collectionphotos
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
@@ -34,7 +35,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.items
+
 import com.hyejeanmoon.splashcompose.ErrorAlert
 import com.hyejeanmoon.splashcompose.screen.photos.PhotoImage
 
@@ -70,13 +71,13 @@ fun PhotosOfCollectionScreen(
                 }
             )
         }
-    ) { _ ->
+    ) { innerPadding ->
         LazyColumn(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize().padding(innerPadding),
         ) {
-            items(pagingItems) { photoItem ->
+            items(count = pagingItems.itemCount) { index ->
                 val item by remember {
-                    mutableStateOf(photoItem)
+                    mutableStateOf(pagingItems[index])
                 }
                 item?.also { photo ->
                     PhotoImage(

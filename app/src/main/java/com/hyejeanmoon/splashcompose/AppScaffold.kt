@@ -166,7 +166,7 @@ fun AppScaffold() {
                 }
             }
         }
-    ) { _ ->
+    ) { padding ->
         AnimatedNavHost(
             navController = navController,
             startDestination = Screen.Random.route

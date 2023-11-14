@@ -40,7 +40,6 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.items
 import coil.compose.rememberImagePainter
 import com.hyejeanmoon.splashcompose.ErrorAlert
 import com.hyejeanmoon.splashcompose.entity.Collections
@@ -63,7 +62,8 @@ fun CollectionsScreen(
         modifier = modifier.fillMaxSize(),
         state = listState
     ) {
-        items(pagingItems) { collectionsItem ->
+        items(count = pagingItems.itemCount) { index ->
+            val collectionsItem = pagingItems[index];
             collectionsItem?.also {
                 val item by remember { mutableStateOf(collectionsItem) }
                 CollectionsItem(

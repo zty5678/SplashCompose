@@ -74,6 +74,9 @@ object FileUtils {
             // First, write the actual data for our screenshot
             uri?.also {
                 val out = resolver.openOutputStream(it)
+                if (out == null){
+                    throw IOException()
+                }
                 if (!image.compress(Bitmap.CompressFormat.PNG, 100, out)) {
                     throw IOException()
                 }

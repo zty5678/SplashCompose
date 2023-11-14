@@ -16,7 +16,9 @@
 
 package com.hyejeanmoon.splashcompose.api
 
+import androidx.compose.ui.res.stringResource
 import com.hyejeanmoon.splashcompose.EnvParameters
+import com.hyejeanmoon.splashcompose.R
 import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
 
@@ -41,7 +43,7 @@ class SplashOkHttpClient {
 
     val splashOkHttpClient: OkHttpClient
         get() = okHttpClient.newBuilder()
-            .addInterceptor(ApiInterceptor(EnvParameters.CLIENT_ID)).build()
+            .addInterceptor(ApiInterceptor(EnvParameters.UNSPLASH_CLIENT_ID)).build()
 
     companion object {
         private const val CONNECT_TIMEOUT_SECOND = 20

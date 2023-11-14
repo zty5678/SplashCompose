@@ -16,6 +16,8 @@
 
 package com.hyejeanmoon.splashcompose
 
+import androidx.compose.ui.res.stringResource
+
 /**
  * EnvParameters
  *
@@ -24,8 +26,8 @@ package com.hyejeanmoon.splashcompose
 class EnvParameters {
     companion object {
         const val BASE_URL = "https://api.unsplash.com"
-        const val CLIENT_ID = ""
         const val DB_NAME = "SplashCompose.db"
+        var UNSPLASH_CLIENT_ID = ""
         const val SHARED_PREFERENCE_DATA_NAME = "SPLASH_COMPOSE"
         const val KEY_ORDER_BY = "SPLASH_COMPOSE_ORDER_BY"
         const val KEY_DISPLAY_RESOLUTION = "SPLASH_COMPOSE_DISPLAY_RESOLUTION"

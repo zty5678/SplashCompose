@@ -45,7 +45,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.items
+
 import coil.compose.rememberImagePainter
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
@@ -98,12 +98,12 @@ fun UserDetailScreen(
                 }
             )
         }
-    ) { _ ->
+    ) { padding ->
         ConstraintLayout {
             val (visibleLayout, tabrow, pager) = createRefs()
 
             AnimatedVisibility(
-                modifier = Modifier.constrainAs(visibleLayout) {
+                modifier = Modifier.padding(padding).constrainAs(visibleLayout) {
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                     top.linkTo(parent.top)
@@ -415,7 +415,8 @@ fun UserDetailPhotos(
         modifier = modifier
             .fillMaxWidth()
     ) {
-        items(photos) { photoItem ->
+        items(count = photos.itemCount) { index ->
+            val photoItem = photos[index];
             val item by remember {
                 mutableStateOf(photoItem)
             }
@@ -457,7 +458,8 @@ fun UserDetailCollections(
         modifier = modifier
             .fillMaxWidth()
     ) {
-        items(collections) { collectionsItem ->
+        items(count = collections.itemCount) { index ->
+            val collectionsItem = collections[index]
             val item by remember {
                 mutableStateOf(collectionsItem)
             }
@@ -502,7 +504,8 @@ fun UserDetailLikedPhotos(
         modifier = modifier
             .fillMaxWidth()
     ) {
-        items(photos) { photoItem ->
+        items(count = photos.itemCount) { index ->
+            val photoItem = photos[index]
             val item by remember {
                 mutableStateOf(photoItem)
             }

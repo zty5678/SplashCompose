@@ -70,7 +70,7 @@ class ApiEnqueueCallback<T>(
     override fun onFailure(call: Call<T>, t: Throwable) {
         LogUtils.outputLog(
             "ApiEnqueueCallback#onFailure: requestUrl=%s,  stateOfCanceled=%s",
-            call.request().url().uri().toString(),
+            call.request().url.toUri().toString(),
             call.isCanceled
         )
 
